@@ -1,13 +1,13 @@
 from django.shortcuts import render
 
-from rest_framework import generics
+from rest_framework import generics, viewsets
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
 # from rest_framework import status
 
 from .serializers import BookingSerializer, MenuSerializer
 
-from .models import Menu
+from .models import Menu, Booking
 
 
 def index(request):
@@ -20,6 +20,10 @@ class menuItemView(generics.ListCreateAPIView):
 class singleMenuItemView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
 
 # LO COMENTADO ES SIN GENERICS VIEWS
 # ----------------------------------
